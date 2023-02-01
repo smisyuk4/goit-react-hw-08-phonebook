@@ -33,7 +33,7 @@ npm install react-router-dom
 Це фінальна версія програми, тому попрацюй над оформленням інтерфейсу. Можна використовувати бібліотеку стилізації або компонентів, наприклад Chakra UI або Material UI.
 
 https://mui.com/
-
+npm install --save @emotion/styled
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/material @mui/styled-engine-sc styled-components
 npm install @mui/icons-material
@@ -44,3 +44,8 @@ https://notiflix.github.io/documentation
 https://notiflix.github.io/loading
 
 npm i notiflix
+
+## Типи пропсів
+https://github.com/facebook/prop-types
+
+npm i prop-types
