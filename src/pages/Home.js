@@ -1,7 +1,7 @@
 export const Home = () => {
     return (
         <>
-            <h1>this is contacts app</h1>
+            <h1>Home page.</h1>
         </>
     )
 }
