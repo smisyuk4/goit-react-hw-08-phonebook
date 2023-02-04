@@ -14,11 +14,22 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSignupMutation } from "../../redux/auth/contactsBaseApi";
+
+// import { useDispatch } from "react-redux";
+// import { addToken } from "../../redux/auth/authSlice";
 
 const theme = createTheme();
 
 export const FormRegUser = () => {
     const [showPassword, setShowPassword] = React.useState(false);
+    const [ signupUser, {data}] = useSignupMutation()
+    // const dispatch = useDispatch()
+    console.log('data ', data)
+
+    // React.useEffect(()=>{
+    //     dispatch(addToken('data.token'))
+    // },[])
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -28,14 +39,15 @@ export const FormRegUser = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        const form = new FormData(event.currentTarget);
 
-        console.log({
-        user: data.get('userName'),
-        email: data.get('email'),
-        password: data.get('password'),
-        });
-
+        const newUser = {
+            name: form.get('name'),
+            email: form.get('email'),
+            password: form.get('password'),
+        }
+        signupUser(newUser) //jannadark2 jannadark2@mail.com jannadark2123456
+        event.target.reset()
     };
 
     return (
@@ -54,7 +66,7 @@ export const FormRegUser = () => {
                     <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField                    
-                        name="userName"
+                        name="name"
                         type="text"
                         required
                         fullWidth 
@@ -117,4 +129,8 @@ export const FormRegUser = () => {
         </Container>
         </ThemeProvider>
     );
+}
+
+const reset = ()=> {
+   
 }
