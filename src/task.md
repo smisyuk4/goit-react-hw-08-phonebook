@@ -11,6 +11,8 @@ npm install @reduxjs/toolkit
 npm install @reduxjs/toolkit react-redux
 npm install redux-persist
 
+https://www.youtube.com/watch?v=-JJFQ9bkUbo&ab_channel=DaveGray
+
 ## Маршрутизація
 Додай маршрутизацію з бібліотекою React Router. У програмі має бути кілька сторінок:
 

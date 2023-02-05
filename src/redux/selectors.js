@@ -1,2 +1,2 @@
-export const getToken = state => state.token;
-export const getUser = state => state.user;
+export const selectCurrentUser = state => state.auth.user;
+export const selectCurrentToken = state => state.auth.token;

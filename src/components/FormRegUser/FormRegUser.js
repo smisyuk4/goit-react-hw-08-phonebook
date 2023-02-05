@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Link } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -14,22 +13,18 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useSignupMutation } from "../../redux/auth/contactsBaseApi";
-
-// import { useDispatch } from "react-redux";
-// import { addToken } from "../../redux/auth/authSlice";
+import { useState } from "react"
+import { setCredentials } from 'redux/auth/authSlice';
+import { useSignupMutation } from 'redux/auth/apiSlice';
+import { useDispatch } from "react-redux";
 
 const theme = createTheme();
 
 export const FormRegUser = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [ signupUser, {data}] = useSignupMutation()
-    // const dispatch = useDispatch()
-    console.log('data ', data)
-
-    // React.useEffect(()=>{
-    //     dispatch(addToken('data.token'))
-    // },[])
+    const [ signup, {isLoading}] = useSignupMutation()
+    const dispatch = useDispatch()
+    console.log('isLoading ', isLoading)
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -37,7 +32,7 @@ export const FormRegUser = () => {
         event.preventDefault();
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
 
@@ -46,8 +41,17 @@ export const FormRegUser = () => {
             email: form.get('email'),
             password: form.get('password'),
         }
-        signupUser(newUser) //jannadark2 jannadark2@mail.com jannadark2123456
+        console.log(newUser)        
+        // signupUser(newUser) //jannadark2 jannadark2@mail.com jannadark2123456
         event.target.reset()
+
+        try {
+            const userData = await signup(newUser)      
+            console.log(userData)      
+            dispatch(setCredentials({...userData}))
+        } catch (error){
+            console.log(error)
+        }
     };
 
     return (
@@ -129,8 +133,4 @@ export const FormRegUser = () => {
         </Container>
         </ThemeProvider>
     );
-}
-
-const reset = ()=> {
-   
 }

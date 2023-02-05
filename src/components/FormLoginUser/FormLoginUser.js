@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Link } from "react-router-dom"
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -15,10 +14,19 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { useState } from "react"
+import { setCredentials } from 'redux/auth/authSlice';
+import { useLoginMutation } from 'redux/auth/apiSlice';
+import { useDispatch } from "react-redux";
+
 const theme = createTheme();
 
 export const FormLoginUser = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [ login, {isLoading}] = useLoginMutation()
+    const dispatch = useDispatch()
+    console.log('isLoading ', isLoading)
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -26,15 +34,25 @@ export const FormLoginUser = () => {
         event.preventDefault();
     };
 
-    const handleSubmit = (event) => {
+    //jannadark2 jannadark2@mail.com jannadark2123456
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
+        const form = new FormData(event.currentTarget);
 
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        });
+        const valueForm = {           
+            email: form.get('email'),
+            password: form.get('password'),
+        }
+        console.log(valueForm)      
 
+        event.target.reset()
+
+        try {
+            const userData = await login(valueForm)           
+            dispatch(setCredentials({...userData}))
+        } catch (error){
+            console.log(error)
+        }
     };
 
     return (
