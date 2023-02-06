@@ -1,4 +1,9 @@
+import { useState } from "react"
+import { useDispatch } from "react-redux";
+import { setCredentials } from 'redux/auth/authSlice';
+import { useLoginMutation } from 'redux/auth/apiSlice';
 import { Link } from "react-router-dom"
+
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -14,27 +19,15 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useState } from "react"
-import { setCredentials } from 'redux/auth/authSlice';
-import { useLoginMutation } from 'redux/auth/apiSlice';
-import { useDispatch } from "react-redux";
-
 const theme = createTheme();
 
 export const FormLoginUser = () => {
-    const [ login, {isLoading}] = useLoginMutation()
+    const [ login ] = useLoginMutation()
     const dispatch = useDispatch()
-    console.log('isLoading ', isLoading)
-
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    //jannadark2 jannadark2@mail.com jannadark2123456
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
@@ -43,7 +36,6 @@ export const FormLoginUser = () => {
             email: form.get('email'),
             password: form.get('password'),
         }
-        console.log(valueForm)      
 
         event.target.reset()
 
@@ -91,8 +83,7 @@ export const FormLoginUser = () => {
                             <InputAdornment position="end">
                                 <IconButton
                                 aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
+                                onClick={handleClickShowPassword}      
                                 edge="end"
                                 >
                                 {showPassword ? <VisibilityOff /> : <Visibility />}

@@ -1,4 +1,9 @@
+import { useState } from "react"
+import { useDispatch } from "react-redux";
+import { setCredentials } from 'redux/auth/authSlice';
+import { useSignupMutation } from 'redux/auth/apiSlice';
 import { Link } from "react-router-dom"
+
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -13,24 +18,15 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from "react"
-import { setCredentials } from 'redux/auth/authSlice';
-import { useSignupMutation } from 'redux/auth/apiSlice';
-import { useDispatch } from "react-redux";
 
 const theme = createTheme();
 
 export const FormRegUser = () => {
-    const [ signup, {isLoading}] = useSignupMutation()
+    const [ signup ] = useSignupMutation()
     const dispatch = useDispatch()
-    console.log('isLoading ', isLoading)
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -41,13 +37,11 @@ export const FormRegUser = () => {
             email: form.get('email'),
             password: form.get('password'),
         }
-        console.log(newUser)        
-        // signupUser(newUser) //jannadark2 jannadark2@mail.com jannadark2123456
+
         event.target.reset()
 
         try {
-            const userData = await signup(newUser)      
-            console.log(userData)      
+            const userData = await signup(newUser)        
             dispatch(setCredentials({...userData}))
         } catch (error){
             console.log(error)
@@ -102,7 +96,6 @@ export const FormRegUser = () => {
                                 <IconButton
                                 aria-label="toggle password visibility"
                                 onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
                                 edge="end"
                                 >
                                 {showPassword ? <VisibilityOff /> : <Visibility />}
