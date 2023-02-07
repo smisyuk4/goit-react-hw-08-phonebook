@@ -12,7 +12,7 @@ export const apiSlice = createApi({
       return headers
     }
   }),
-  endpoints: builder=>({
+  endpoints: builder => ({
     signup: builder.mutation({
       query: credentials => ({
           url: '/users/signup',
@@ -33,7 +33,22 @@ export const apiSlice = createApi({
           method: 'POST',
       })
     }),
+    getCurrent: builder.query({
+      queryFn: (_,{getState}) => {
+        const token = getState().auth.token
+
+        if(!token){ 
+          return {
+            error: {
+              statusText: 'Internal Server Error',              
+            },
+          }  
+        } else {
+          return {query: () => '/users/current'} 
+        }       
+      },       
+    }),
   })
 })
 
-export const { useLoginMutation, useSignupMutation, useLogoutMutation } = apiSlice
+export const { useLoginMutation, useSignupMutation, useLogoutMutation, useGetCurrentQuery } = apiSlice
