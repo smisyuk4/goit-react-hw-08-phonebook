@@ -34,19 +34,16 @@ export const apiSlice = createApi({
       })
     }),
     getCurrent: builder.query({
-      queryFn: (_,{getState}) => {
+      async queryFn(_arg, {getState}, _extraOptions, fetchWithBQ) {
         const token = getState().auth.token
-
-        if(!token){ 
-          return {
-            error: {
-              statusText: 'Internal Server Error',              
-            },
-          }  
+          
+        if (token){
+          const result = await fetchWithBQ('/users/current')         
+          return { data: result.data }
         } else {
-          return {query: () => '/users/current'} 
-        }       
-      },       
+          return { error: 'Token not found'}
+        }               
+      },      
     }),
   })
 })
