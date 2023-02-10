@@ -6,7 +6,7 @@ import { selectVisibleContacts, selectIsLoading, selectError } from 'redux/selec
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // import { Filter } from 'components/Filter';
-// import { Contact } from 'components/Contact';
+import { Contact } from 'components/Contact';
 
 
 
@@ -31,29 +31,13 @@ export const ContactsList = () => {
         // Notify.failure(error, { position: 'center-top' })
 
         return (    
-            <>{!isLoadingS && <b>Error</b>}       </>                         
+            <>{!isLoadingS && <b>Error</b>}</>                         
         )
     }
 
     return (<ul>
-            {visibleContacts.length !== 0 && visibleContacts.map(item => <li key={item.id}>{item.name} : {item.number}</li>)}
-        </ul>
+            {visibleContacts.length !== 0 && 
+                visibleContacts.map(item => <Contact key={item.id} contact={item}/>)}
+            </ul>
     )    
 }
-
-{/* <div>   
-          
-<Filter/>
-
-{visibleContacts.length !== 0 && 
-    <ul>
-    <Contact/>
-       {visibleContacts.map(item => (
-            <Contact
-                contact={item}
-                key={item.id}                           
-            />
-        ))} 
-    </ul>
-}          
-</div> */}

@@ -1,37 +1,45 @@
 import { useDispatch } from "react-redux";
-// import { deleteContact } from "../../redux/operations"
+import { deleteContact } from "../../redux/contacts/contactsSlice"
 import PropTypes from 'prop-types';
+import { useRemoveMutation } from "../../redux/auth/apiSlice"
 // import { IconContext } from 'react-icons';
 // import { RiUserUnfollowFill } from 'react-icons/ri';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
+// import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const Contact = ({ contact }) => {
-    // const dispatch = useDispatch()
+    const [ remove ] = useRemoveMutation()
+    // console.log(remove)
+    const dispatch = useDispatch()
 
-    // const { id, name, number } = contact;
+    const { id, name, number } = contact;
 
-    // const handleDeleteContact = ()=>{
-    //     dispatch(deleteContact(id))
+    const handleDeleteContact = async ()=>{
+        try{
+            const data = await remove(id)
+            console.log(data)
+            dispatch(deleteContact(data))
 
-    //     Notify.success(
-    //         'The contact has been delete from storage',
-    //         { position: 'center-top' })
-    // }
+             // Notify.success(
+        //     'The contact has been delete from storage',
+        //     { position: 'center-top' })
+        } catch(error){
+            console.log(error)
+        } 
+    }
 
     return (
-        <li> item </li>
-        // <li>
-        //     {name}: {number}
-        //     <button
-        //         type="button"
-        //         onClick={handleDeleteContact}
-        //     >
-        //         <IconContext.Provider value={{ className: 'global-icon' }}>
-        //             <RiUserUnfollowFill />
-        //         </IconContext.Provider>
-        //         Remove
-        //     </button>
-        // </li>
+        <li>
+            {name}: {number} : {id}
+            <button
+                type="button"
+                onClick={handleDeleteContact}
+            >
+                {/* <IconContext.Provider value={{ className: 'global-icon' }}>
+                    <RiUserUnfollowFill />
+                </IconContext.Provider> */}
+                Remove
+            </button>
+        </li>
     );
 };
 

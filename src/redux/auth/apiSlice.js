@@ -13,7 +13,7 @@ export const apiSlice = createApi({
       return headers
     }
   }),
-  // tagTypes: ['contacts'],
+  // tagTypes: ['items'],
   endpoints: builder => ({
     signup: builder.mutation({
       query: credentials => ({
@@ -50,6 +50,7 @@ export const apiSlice = createApi({
     }),
     getContacts: builder.query({
       query: () => '/contacts',
+      // providesTags: ['items'],
     }),
     create: builder.mutation({
       query: credentials => ({
@@ -57,7 +58,14 @@ export const apiSlice = createApi({
           method: 'POST',
           body: credentials,
       }),
-      // invalidatesTags: ['contacts'],
+      // invalidatesTags: ['items'],
+    }),
+    remove: builder.mutation({
+      query: (id)=>({
+        url: `/contacts/${id}`,
+        method: 'DELETE',
+      }),
+      // invalidatesTags: ['items'],
     }),
   })
 })
@@ -68,5 +76,6 @@ export const {
   useLogoutMutation, 
   useGetCurrentQuery, 
   useGetContactsQuery, 
-  useCreateMutation 
+  useCreateMutation,
+  useRemoveMutation 
 } = apiSlice
