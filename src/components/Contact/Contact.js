@@ -1,13 +1,12 @@
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contacts/contactsSlice"
 import PropTypes from 'prop-types';
-import { useRemoveMutation } from "../../redux/auth/apiSlice"
-// import { IconContext } from 'react-icons';
-// import { RiUserUnfollowFill } from 'react-icons/ri';
+import { deleteContact, changeContact } from "../../redux/contacts/contactsSlice"
+import { useRemoveMutation, useChangeMutation } from "../../redux/auth/apiSlice"
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const Contact = ({ contact }) => {
     const [ remove ] = useRemoveMutation()
+    const [ change ] = useChangeMutation()
     // console.log(remove)
     const dispatch = useDispatch()
 
@@ -16,7 +15,6 @@ export const Contact = ({ contact }) => {
     const handleDeleteContact = async ()=>{
         try{
             const data = await remove(id)
-            console.log(data)
             dispatch(deleteContact(data))
 
              // Notify.success(
@@ -27,6 +25,10 @@ export const Contact = ({ contact }) => {
         } 
     }
 
+    const handleChangeContact = async ()=>{
+        dispatch(changeContact(contact))
+    }
+
     return (
         <li>
             {name}: {number} : {id}
@@ -34,10 +36,13 @@ export const Contact = ({ contact }) => {
                 type="button"
                 onClick={handleDeleteContact}
             >
-                {/* <IconContext.Provider value={{ className: 'global-icon' }}>
-                    <RiUserUnfollowFill />
-                </IconContext.Provider> */}
                 Remove
+            </button>
+            <button
+                type="button"
+                onClick={handleChangeContact}
+            >
+                Change
             </button>
         </li>
     );

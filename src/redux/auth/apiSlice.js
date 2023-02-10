@@ -67,6 +67,17 @@ export const apiSlice = createApi({
       }),
       // invalidatesTags: ['items'],
     }),
+    change: builder.mutation({
+      query: ({id, name, number}) => ({
+        url: `/contacts/${id}`,
+        method: 'PATCH',
+        body: {
+          name,
+          number,
+        },
+      }),
+      // invalidatesTags: ['items'],
+    }),
   })
 })
 
@@ -77,5 +88,6 @@ export const {
   useGetCurrentQuery, 
   useGetContactsQuery, 
   useCreateMutation,
-  useRemoveMutation 
+  useRemoveMutation,
+  useChangeMutation
 } = apiSlice

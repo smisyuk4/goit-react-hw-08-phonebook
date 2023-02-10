@@ -4,6 +4,8 @@ const initialState = {
     items: [],
     isLoading: false,
     error: null,
+    itemChange: {},
+    isChange: false,
 }
 
 const contactsSlice = createSlice({
@@ -11,10 +13,10 @@ const contactsSlice = createSlice({
     initialState,
     reducers: {
         setContacts: (state, action) => {
-            console.log(action.payload)
             state.items = action.payload.data;
             state.isLoading = action.payload.isLoading;
             state.error = action.payload.error;
+            // state.isChange = false;
         },
         addContact: (state, action) => {
             state.items.push(action.payload.data);
@@ -28,9 +30,18 @@ const contactsSlice = createSlice({
             state.items.splice(index, 1);
             // state.isLoading = action.payload.isLoading;
             // state.error = action.payload.error;
+        },
+        changeContact: (state, action) => {
+            console.log(action.payload);
+            state.itemChange = action.payload;
+            state.isChange = true;
+        },
+        clearChange: (state, action) => {
+            state.itemChange = {}
+            state.isChange = false;
         }
     },
 });
 
-export const { setContacts, addContact, deleteContact } = contactsSlice.actions;
+export const { setContacts, addContact, deleteContact, changeContact, clearChange } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
