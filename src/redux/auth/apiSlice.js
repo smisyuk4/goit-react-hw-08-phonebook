@@ -13,6 +13,7 @@ export const apiSlice = createApi({
       return headers
     }
   }),
+  // tagTypes: ['contacts'],
   endpoints: builder => ({
     signup: builder.mutation({
       query: credentials => ({
@@ -47,7 +48,25 @@ export const apiSlice = createApi({
         }               
       },      
     }),
+    getContacts: builder.query({
+      query: () => '/contacts',
+    }),
+    create: builder.mutation({
+      query: credentials => ({
+          url: '/contacts',
+          method: 'POST',
+          body: credentials,
+      }),
+      // invalidatesTags: ['contacts'],
+    }),
   })
 })
 
-export const { useLoginMutation, useSignupMutation, useLogoutMutation, useGetCurrentQuery } = apiSlice
+export const { 
+  useLoginMutation, 
+  useSignupMutation, 
+  useLogoutMutation, 
+  useGetCurrentQuery, 
+  useGetContactsQuery, 
+  useCreateMutation 
+} = apiSlice
