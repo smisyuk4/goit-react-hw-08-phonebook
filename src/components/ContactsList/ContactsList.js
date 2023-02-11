@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+// import { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
 import { useGetContactsQuery } from "redux/auth/apiSlice";
-import { setContacts } from "../../redux/contacts/contactsSlice"
-import { selectVisibleContacts, selectIsLoading, selectError } from 'redux/selectors';
+// import { setContacts } from "../../redux/contacts/contactsSlice"
+// import { selectVisibleContacts } from 'redux/selectors';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 // import { Filter } from 'components/Filter';
@@ -11,33 +11,38 @@ import { Contact } from 'components/Contact';
 
 
 export const ContactsList = () => {
-    const {data, isLoading, error} = useGetContactsQuery()
-    const visibleContacts = useSelector(selectVisibleContacts)
-    const isLoadingS = useSelector(selectIsLoading)
-    const errorS = useSelector(selectError)
-    const dispatch = useDispatch();
+    const {data, isLoading, error, isSuccess} = useGetContactsQuery() //
+    console.log(data)
+    console.log(!isSuccess)
+    // const visibleContacts = useSelector(selectVisibleContacts)
+    // console.log(visibleContacts)
+    // const dispatch = useDispatch();
     
-    useEffect(() => {
-        dispatch(setContacts({data, isLoading, error}));     
-    }, [dispatch, data, isLoading, error]);
+    // useEffect(() => {
+        // dispatch(setContacts({data, isLoading, error}));     
+    // }, [dispatch, data, isLoading, error]);
 
-    if(isLoadingS && !errorS){
+    if(isLoading && !error){
         return (
             <b>Request in progress...</b>
         )
     }
 
-    if (errorS){
+    if (error){
         // Notify.failure(error, { position: 'center-top' })
 
         return (    
-            <>{!isLoadingS && <b>Error</b>}</>                         
+            <>{!isLoading && <b>Error</b>}</>                         
         )
     }
 
-    return (<ul>
-            {visibleContacts.length !== 0 && 
-                visibleContacts.map(item => <Contact key={item.id} contact={item}/>)}
+    if (isSuccess) {
+        return (
+            <ul>
+             {data.length !== 0 && 
+                data.map(item => <Contact key={item.id} contact={item}/>)}
             </ul>
-    )    
+        )   
+    }
+   
 }

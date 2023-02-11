@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { removeContacts } from '../contacts/contactsSlice'
 
 const initialState = {
     user: null, 
@@ -23,15 +22,11 @@ const authSlice = createSlice({
             state.isLoggedIn = false;
         },
         setCurrent: (state, action) => {
+            console.log(action.payload)
             state.user = action.payload;
             state.isLoggedIn = true;
         },
     },
-    // extraReducers: {
-    //     [removeContacts]: ()=>{
-
-    //     }
-    // }
 });
 
 export const { setCredentials, setLogout, setCurrent } = authSlice.actions;

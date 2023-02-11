@@ -67,7 +67,7 @@ export const FormAddContact = () => {
 
         try {
             const regContact = await create(newContact)        
-            dispatch(addContact({...regContact}))
+            // dispatch(addContact({...regContact}))
         } catch (error){
             console.log(error)
         }

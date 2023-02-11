@@ -1,21 +1,17 @@
 import { useDispatch } from "react-redux";
 import PropTypes from 'prop-types';
-import { deleteContact, changeContact } from "../../redux/contacts/contactsSlice"
+import { changeContact } from "../../redux/contacts/contactsSlice" // deleteContact, 
 import { useRemoveMutation } from "../../redux/auth/apiSlice" //useChangeMutation
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const Contact = ({ contact }) => {
-    const [ remove ] = useRemoveMutation()
-    // const [ change ] = useChangeMutation()
-    // console.log(remove)
-    const dispatch = useDispatch()
-
     const { id, name, number } = contact;
+    const [ remove ] = useRemoveMutation()
+    const dispatch = useDispatch()
 
     const handleDeleteContact = async ()=>{
         try{
-            const data = await remove(id)
-            dispatch(deleteContact(data))
+            await remove(id)
 
              // Notify.success(
         //     'The contact has been delete from storage',
