@@ -1,22 +1,15 @@
-// import { useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
+import { selectFilter } from 'redux/selectors';
 import { useGetContactsQuery } from "redux/auth/apiSlice";
-// import { setContacts } from "../../redux/contacts/contactsSlice"
-// import { selectVisibleContacts } from 'redux/selectors';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { Filter } from 'components/Filter';
 import { Contact } from 'components/Contact';
 
 export const ContactsList = () => {
-    const {data, isLoading, error, isSuccess} = useGetContactsQuery() //
-    // const visibleContacts = useSelector(selectVisibleContacts)
-    // console.log(visibleContacts)
-    // const dispatch = useDispatch();
-    
-    // useEffect(() => {
-        // dispatch(setContacts({data, isLoading, error}));     
-    // }, [dispatch, data, isLoading, error]);
+    const {data, isLoading, error, isSuccess} = useGetContactsQuery()
+    const filter = useSelector(selectFilter)
 
     if(isLoading && !error){
         return (
@@ -25,20 +18,24 @@ export const ContactsList = () => {
     }
 
     if (error){
-        // Notify.failure(error, { position: 'center-top' })
+        Notify.failure(error, { position: 'center-top' })
         return (    
             <>{!isLoading && <b>Error</b>}</>                         
         )
-    }
+    }      
 
     if (isSuccess) {
+        const findName = filter.toLowerCase();
+        const visibleContacts = data.filter(({ name }) =>
+            name.toLowerCase().includes(findName));
+ 
         return (
             <div>
                 <Filter/>
                 <ul>
-                    {data.length !== 0 && data.map(item => <Contact key={item.id} contact={item}/>)}                        
+                    {visibleContacts.length !== 0 && visibleContacts.map(item => <Contact key={item.id} contact={item}/>)}                        
                 </ul>
             </div>
         )   
-    }   
+    } 
 }

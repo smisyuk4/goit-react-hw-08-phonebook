@@ -21,9 +21,7 @@ export const UserMenu = () =>{
     const handleLogout = async () => {
         try {
             await logout()      
-            console.log('push logout')   
             dispatch(setLogout())
-            console.log('set ----- logout')   
         } catch (error){
             console.log(error)
         }

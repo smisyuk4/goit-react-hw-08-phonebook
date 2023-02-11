@@ -5,7 +5,7 @@
 // import * as Yup from 'yup';
 
 // import { Report } from 'notiflix/build/notiflix-report-aio';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import { IconContext } from 'react-icons';
 // import {
 //     RiContactsFill,
@@ -61,7 +61,10 @@ export const FormAddContact = () => {
         event.target.reset()
 
         try {
-            await create(newContact)       
+            await create(newContact)                
+            Notify.success('The contact has been sent to storage', {
+                            position: 'center-top',
+                        });
         } catch (error){
             console.log(error)
         }
@@ -88,8 +91,7 @@ export const FormAddContact = () => {
                     required
                     fullWidth 
                     label="User Name"
-                    autoComplete="off"
-                    autoFocus
+                    autoComplete="off"    
                     />
                 </Grid>
                 <Grid item xs={12}>

@@ -70,7 +70,6 @@ export const FormRegUser = () => {
                         fullWidth 
                         label="User Name"
                         autoComplete="off"
-                        autoFocus
                         />
                     </Grid>
                     <Grid item xs={12}>

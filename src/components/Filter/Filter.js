@@ -15,7 +15,6 @@ export const Filter = () => {
                     type="text"
                     label="Find contacts by name"
                     autoComplete="off"
-                    autoFocus
                     onChange={handleSetFilter}
                     />
     );

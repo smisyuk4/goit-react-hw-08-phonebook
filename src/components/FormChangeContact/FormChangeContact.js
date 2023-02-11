@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const theme = createTheme();
 
@@ -32,7 +33,10 @@ export const FormChangeContact = () => {
 
         try {
             if(name !== newContact.name || number !==newContact.number) {
-                await change(newContact)              
+                await change(newContact) 
+                Notify.success(
+                    'The contact has been change in storage',
+                    { position: 'center-top' })           
             }
             dispatch(clearChange())
         } catch (error){
@@ -62,8 +66,7 @@ export const FormChangeContact = () => {
                     required
                     fullWidth 
                     label="User Name"
-                    autoComplete="off"
-                    autoFocus
+                    autoComplete="off"             
                     />
                 </Grid>
                 <Grid item xs={12}>
