@@ -5,7 +5,7 @@ import { FormChangeContact } from 'components/FormChangeContact';
 import { ContactsList } from 'components/ContactsList';
 import { Title } from 'components/Title';
 
-export const Contacts = () => {
+const Contacts = () => {
   const isChange = useSelector(selectIsChange)
 
     return (
@@ -32,3 +32,5 @@ export const Contacts = () => {
       </div>
     )
 }
+
+export default Contacts

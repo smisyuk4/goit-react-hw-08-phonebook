@@ -1,7 +1,9 @@
 import { FormLoginUser } from "../components/FormLoginUser"
 
-export const Login = () => {
+const Login = () => {
     return(
         <FormLoginUser/>
     )
 }
+
+export default Login

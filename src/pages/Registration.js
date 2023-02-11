@@ -1,9 +1,11 @@
 import { FormRegUser } from "../components/FormRegUser"
 
-export const Registration = () => {
+const Registration = () => {
     return(     
         <>
         <FormRegUser/>
         </>
     )
 }
+
+export default Registration
