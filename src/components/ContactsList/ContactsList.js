@@ -5,15 +5,11 @@ import { useGetContactsQuery } from "redux/auth/apiSlice";
 // import { selectVisibleContacts } from 'redux/selectors';
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-// import { Filter } from 'components/Filter';
+import { Filter } from 'components/Filter';
 import { Contact } from 'components/Contact';
-
-
 
 export const ContactsList = () => {
     const {data, isLoading, error, isSuccess} = useGetContactsQuery() //
-    console.log(data)
-    console.log(!isSuccess)
     // const visibleContacts = useSelector(selectVisibleContacts)
     // console.log(visibleContacts)
     // const dispatch = useDispatch();
@@ -30,7 +26,6 @@ export const ContactsList = () => {
 
     if (error){
         // Notify.failure(error, { position: 'center-top' })
-
         return (    
             <>{!isLoading && <b>Error</b>}</>                         
         )
@@ -38,11 +33,12 @@ export const ContactsList = () => {
 
     if (isSuccess) {
         return (
-            <ul>
-             {data.length !== 0 && 
-                data.map(item => <Contact key={item.id} contact={item}/>)}
-            </ul>
+            <div>
+                <Filter/>
+                <ul>
+                    {data.length !== 0 && data.map(item => <Contact key={item.id} contact={item}/>)}                        
+                </ul>
+            </div>
         )   
-    }
-   
+    }   
 }

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from "react"; //useState
+import { useEffect } from "react";
 import { useGetCurrentQuery } from 'redux/auth/apiSlice'; 
 import { setCurrent } from "redux/auth/authSlice";
 import { selectCurrentToken } from 'redux/selectors'
@@ -9,22 +9,13 @@ import { Home, Registration, Login, Profile, Contacts } from "../../pages"
 
 export const App = () => {
   const token = useSelector(selectCurrentToken)
-  console.log(token)
-  // const [isSkip, setIsSkip] = useState(true)
-  // const {data, isSuccess} = useGetCurrentQuery()//'', isSkip
-  console.log("token === null ", token === null)
-    const {data, isSuccess} = useGetCurrentQuery('', {skip: token === null})//'', isSkip
-  console.log(data, isSuccess)
+  const { data } = useGetCurrentQuery('', {skip: token === null})
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    console.log('token inside - effect: ', token)
     if (token){
-      console.log('token inside - if: ', token)
       dispatch(setCurrent(data))
     }
-
-    // setIsSkip(prev => !prev)
   },[dispatch, data, token])
 
   return (

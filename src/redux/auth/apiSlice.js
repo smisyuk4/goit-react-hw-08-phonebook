@@ -17,7 +17,6 @@ export const apiSlice = createApi({
   endpoints: builder => ({
     getCurrent: builder.query({
       query: () => {
-        console.log('inside - getCurrent')
         return '/users/current'
       },
       // async queryFn(_arg, {getState, dispatch}, _extraOptions, fetchWithBQ) {      

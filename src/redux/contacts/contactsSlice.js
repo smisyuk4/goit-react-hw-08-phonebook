@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    filter: null,
     itemChange: {},
     isChange: false,
 }
@@ -17,9 +18,13 @@ const contactsSlice = createSlice({
         clearChange: (state, action) => {
             state.itemChange = {}
             state.isChange = false;
+        },
+        setFilter: (state, action) => {
+            console.log(action.payload)
+            state.filter = action.payload
         }
     },
 });
 
-export const { changeContact, clearChange } = contactsSlice.actions;
+export const { changeContact, clearChange, setFilter } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;

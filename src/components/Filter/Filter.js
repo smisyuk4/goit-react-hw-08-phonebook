@@ -1,28 +1,22 @@
 import { useDispatch } from "react-redux";
-// import { addFilter } from "../../redux/filterSlice";
-// import { IconContext } from 'react-icons';
-// import { RiTeamFill } from 'react-icons/ri';
+import { setFilter } from "../../redux/contacts/contactsSlice"
+import TextField from '@mui/material/TextField';
 
 export const Filter = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-    // const handleChangeFilter = ({currentTarget})=>{
-    //     dispatch(addFilter(currentTarget.value))
-    // }
+    const handleSetFilter = ({currentTarget})=>{
+        dispatch(setFilter(currentTarget.value))
+    }
 
-    return (
-        <p> filter </p>
-        // <label>
-        //     <IconContext.Provider value={{ className: 'global-icon' }}>
-        //         <RiTeamFill />
-        //     </IconContext.Provider>
-        //     Find contacts by name
-        //     <input
-        //         onChange={handleChangeFilter}
-        //         type="text"
-        //         name="find"
-        //         autoComplete="off"
-        //     />
-        // </label>
+    return (       
+            <TextField                    
+                    name="find"
+                    type="text"
+                    label="Find contacts by name"
+                    autoComplete="off"
+                    autoFocus
+                    onChange={handleSetFilter}
+                    />
     );
 };
