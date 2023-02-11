@@ -34,9 +34,6 @@
 //         .required(),
 // });
 
-// import { useState } from "react"
-import { useDispatch } from "react-redux";
-import { addContact } from 'redux/contacts/contactsSlice';
 import { useCreateMutation } from 'redux/auth/apiSlice';
 
 import Button from '@mui/material/Button';
@@ -51,8 +48,6 @@ const theme = createTheme();
 
 export const FormAddContact = () => {
     const [ create ] = useCreateMutation()
-    // console.log(create)
-    const dispatch = useDispatch()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -66,8 +61,7 @@ export const FormAddContact = () => {
         event.target.reset()
 
         try {
-            const regContact = await create(newContact)        
-            // dispatch(addContact({...regContact}))
+            await create(newContact)       
         } catch (error){
             console.log(error)
         }

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from "react";
+import { useEffect } from "react"; //useState
 import { useGetCurrentQuery } from 'redux/auth/apiSlice'; 
 import { setCurrent } from "redux/auth/authSlice";
 import { selectCurrentToken } from 'redux/selectors'
