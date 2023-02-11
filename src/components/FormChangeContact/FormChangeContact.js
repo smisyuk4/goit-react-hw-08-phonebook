@@ -27,15 +27,14 @@ export const FormChangeContact = () => {
             name: form.get('name'),
             number: form.get('number'),            
         }
-        console.log(newContact)
 
         event.target.reset()
 
         try {
-            const regContact = await change(newContact)      
-            console.log(regContact)  
+            if(name !== newContact.name || number !==newContact.number) {
+                await change(newContact)              
+            }
             dispatch(clearChange())
-
         } catch (error){
             console.log(error)
         }

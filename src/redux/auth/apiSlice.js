@@ -13,28 +13,8 @@ export const apiSlice = createApi({
       return headers
     }
   }),
-  // tagTypes: ['items'],
+  tagTypes: ['users', 'contacts'],
   endpoints: builder => ({
-    signup: builder.mutation({
-      query: credentials => ({
-          url: '/users/signup',
-          method: 'POST',
-          body: credentials,
-      })
-    }),
-    login: builder.mutation({
-      query: credentials => ({
-          url: '/users/login',
-          method: 'POST',
-          body: credentials,
-      })
-    }),
-    logout: builder.mutation({
-      query: () => ({
-          url: '/users/logout',
-          method: 'POST',
-      })
-    }),
     getCurrent: builder.query({
       async queryFn(_arg, {getState, dispatch}, _extraOptions, fetchWithBQ) {
         const token = getState().auth.token
@@ -46,11 +26,36 @@ export const apiSlice = createApi({
         } else {
           return { error: 'Token not found'}
         }               
-      },      
+      },
+      providesTags: ['users'],    
     }),
+    login: builder.mutation({
+      query: credentials => ({
+          url: '/users/login',
+          method: 'POST',
+          body: credentials,
+      }),
+      invalidatesTags: ['users'],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+          url: '/users/logout',
+          method: 'POST',
+      }),
+      invalidatesTags: ['users'],
+    }),
+    signup: builder.mutation({
+      query: credentials => ({
+          url: '/users/signup',
+          method: 'POST',
+          body: credentials,
+      }),
+      invalidatesTags: ['users'],
+    }),    
+    
     getContacts: builder.query({
       query: () => '/contacts',
-      // providesTags: ['items'],
+      providesTags: ['contacts'],
     }),
     create: builder.mutation({
       query: credentials => ({
@@ -58,14 +63,14 @@ export const apiSlice = createApi({
           method: 'POST',
           body: credentials,
       }),
-      // invalidatesTags: ['items'],
+      invalidatesTags: ['contacts'],
     }),
     remove: builder.mutation({
       query: (id)=>({
         url: `/contacts/${id}`,
         method: 'DELETE',
       }),
-      // invalidatesTags: ['items'],
+      invalidatesTags: ['contacts'],
     }),
     change: builder.mutation({
       query: ({id, name, number}) => ({
@@ -76,7 +81,7 @@ export const apiSlice = createApi({
           number,
         },
       }),
-      // invalidatesTags: ['items'],
+      invalidatesTags: ['contacts'],
     }),
   })
 })

@@ -62,7 +62,6 @@ export const FormAddContact = () => {
             name: form.get('name'),
             number: form.get('number'),            
         }
-        console.log(newContact)
 
         event.target.reset()
 

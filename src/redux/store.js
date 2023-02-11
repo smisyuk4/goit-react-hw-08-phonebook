@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
 import { apiSlice } from "./auth/apiSlice"
 import { authReducer } from "./auth/authSlice"
 import { contactsReducer } from './contacts/contactsSlice'
@@ -28,7 +27,5 @@ export const store = configureStore({
   ],
   devTools: true,
 })
-
-setupListeners(store.dispatch)
 
 export const persistor = persistStore(store)

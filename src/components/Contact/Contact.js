@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import PropTypes from 'prop-types';
 import { deleteContact, changeContact } from "../../redux/contacts/contactsSlice"
-import { useRemoveMutation, useChangeMutation } from "../../redux/auth/apiSlice"
+import { useRemoveMutation } from "../../redux/auth/apiSlice" //useChangeMutation
 // import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const Contact = ({ contact }) => {
     const [ remove ] = useRemoveMutation()
-    const [ change ] = useChangeMutation()
+    // const [ change ] = useChangeMutation()
     // console.log(remove)
     const dispatch = useDispatch()
 
@@ -31,7 +31,7 @@ export const Contact = ({ contact }) => {
 
     return (
         <li>
-            {name}: {number} : {id}
+            {name}: {number}
             <button
                 type="button"
                 onClick={handleDeleteContact}

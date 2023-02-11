@@ -18,6 +18,13 @@ const contactsSlice = createSlice({
             state.error = action.payload.error;
             // state.isChange = false;
         },
+        removeContacts: (state, action) => {
+            state.items = [];
+            state.isLoading = false;
+            state.error = null;
+            state.itemChange = {};
+            state.isChange = false;
+        },
         addContact: (state, action) => {
             state.items.push(action.payload.data);
             // state.isLoading = action.payload.isLoading;
@@ -43,5 +50,5 @@ const contactsSlice = createSlice({
     },
 });
 
-export const { setContacts, addContact, deleteContact, changeContact, clearChange } = contactsSlice.actions;
+export const { setContacts, removeContacts, addContact, deleteContact, changeContact, clearChange } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;
