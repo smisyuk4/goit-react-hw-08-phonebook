@@ -1,10 +1,10 @@
-// import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux"; //useDispatch
 // import { addContact } from "../../redux/operations"
 // import { selectContacts } from 'redux/selectors';
 // import {Form, Field, Formik, ErrorMessage } from 'formik';
 // import * as Yup from 'yup';
 
-// import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import { IconContext } from 'react-icons';
 // import {
@@ -34,7 +34,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 //         .required(),
 // });
 
-import { useCreateMutation } from 'redux/auth/apiSlice';
+import { useCreateMutation, useGetContactsQuery } from 'redux/auth/apiSlice';
 
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -48,6 +48,7 @@ const theme = createTheme();
 
 export const FormAddContact = () => {
     const [ create ] = useCreateMutation()
+    const { data } = useGetContactsQuery()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -58,17 +59,25 @@ export const FormAddContact = () => {
             number: form.get('number'),            
         }
 
-        event.target.reset()
-
-        try {
-            await create(newContact)                
-            Notify.success('The contact has been sent to storage', {
-                            position: 'center-top',
-                        });
-        } catch (error){
-            console.log(error)
+            // check uniq contact
+        if (!checkUniq(newContact.name, data)) {
+            try {
+                await create(newContact)                
+                Notify.success('The contact has been sent to storage', {
+                                position: 'center-top',
+                            });
+            } catch (error){
+                console.log(error)
+            }
+            event.target.reset()
+        } else {
+            Report.warning(
+                'Sorry',
+                'Not a unique contact - write a new one!',
+                'Okay'
+            );
         }
-    }
+    };
 
     return (
     <ThemeProvider theme={theme}>
@@ -121,38 +130,11 @@ export const FormAddContact = () => {
     )
 };
 
-
-
-
-
-    // const dispatch = useDispatch();
-    // const contacts = useSelector(selectContacts)
-
-    // const sendContact = ({ name, number }, { resetForm }) => {       
-    //     const newContact = { name, number };
-
-    //     // check uniq contact
-    //     if (!checkUniq(name)) {
-    //         //send data to store
-    //         dispatch(addContact(newContact));
-    //         Notify.success('The contact has been sent to storage', {
-    //             position: 'center-top',
-    //         });
-    //         resetForm();
-    //     } else {
-    //         Report.warning(
-    //             'Sorry',
-    //             'Not a unique contact - write a new one!',
-    //             'Okay'
-    //         );
-    //     }
-    // };
-
-    // const checkUniq = name => {
-    //     const newName = name.toLowerCase();
-    //     return contacts.find(({ name }) => name.toLowerCase() === newName);
-    // };
-
+const checkUniq = (name, data) => {
+    const newName = name.toLowerCase();
+    return data.find(({ name }) => name.toLowerCase() === newName);
+};
+    
     // return (
     //     <p>form</p>
         // <Formik

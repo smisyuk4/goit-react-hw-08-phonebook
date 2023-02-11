@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-// import { setCurrent } from "./authSlice"
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
@@ -16,20 +15,7 @@ export const apiSlice = createApi({
   tagTypes: ['users', 'contacts'],
   endpoints: builder => ({
     getCurrent: builder.query({
-      query: () => {
-        return '/users/current'
-      },
-      // async queryFn(_arg, {getState, dispatch}, _extraOptions, fetchWithBQ) {      
-      //   const token = getState().auth.token
-      //   console.log(token)
-      //   if (token){
-      //     const result = await fetchWithBQ('/users/current')         
-      //     dispatch(setCurrent(result.data))
-      //     return { data: 'all good'}
-      //   } else {
-      //     return { error: 'Token not found'}
-      //   }               
-      // },
+      query: () => '/users/current',
       providesTags: ['users'],    
     }),
     login: builder.mutation({
