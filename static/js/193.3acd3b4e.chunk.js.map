@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/193.3acd3b4e.chunk.js","mappings":"4JAQA,UARc,WACV,OACI,+BACI,uCAGX,C","sources":["pages/Error.js"],"sourcesContent":["const Error = () => {\n    return (\n        <>\n            <p>Error page</p>\n        </>\n    )\n}\n\nexport default Error"],"names":[],"sourceRoot":""}
