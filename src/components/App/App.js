@@ -1,10 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 import { lazy, Suspense } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from "react";
-import { useGetCurrentQuery } from 'redux/auth/apiSlice'; 
-import { setCurrent } from "redux/auth/authSlice";
-import { selectCurrentToken } from 'redux/selectors'
 import { RestrictedRoute } from 'components/RestrictedRoute'
 import { PrivateRoute } from 'components/PrivateRoute'
 
@@ -17,17 +12,6 @@ const Contacts = lazy(() => import("pages/Contacts"));
 const Error = lazy(() => import("pages/Error"));
 
 export const App = () => {
-  // useGetCurrentQuery()
-  const token = useSelector(selectCurrentToken)
-  const { data } = useGetCurrentQuery('', {skip: token === null})
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    if (token){
-      dispatch(setCurrent(data))
-    }
-  },[dispatch, data, token])
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
