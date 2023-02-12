@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
-
 import { useDispatch } from "react-redux";
 import { setLogout } from 'redux/auth/authSlice';
 import { useLogoutMutation } from 'redux/auth/apiSlice';
@@ -9,9 +7,9 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import avatar from "../../images/avatar.JPG"
+import { StyledTooltip, StyledLink } from "./UserMenu.styled"
 
 export const UserMenu = () =>{   
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -37,11 +35,11 @@ export const UserMenu = () =>{
 
     return (<>
        <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <StyledTooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="avatar" src={avatar} />
               </IconButton>
-            </Tooltip>
+            </StyledTooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -59,17 +57,17 @@ export const UserMenu = () =>{
               onClose={handleCloseUserMenu}
             >
              <MenuItem onClick={handleCloseUserMenu}>
-                <Link to="profile">
+                <StyledLink to="profile">
                     Profile
-                </Link>
+                </StyledLink>
             </MenuItem>
             <MenuItem onClick={()=>{
                 handleCloseUserMenu()
                 handleLogout()
             }}>
-                <Link to="/">
+                <StyledLink to="/">
                     Logout
-                </Link>            
+                </StyledLink>            
             </MenuItem>  
             </Menu>
           </Box>

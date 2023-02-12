@@ -1,15 +1,15 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from "react-router-dom"
+import { useState } from 'react';
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from '../../redux/selectors'; 
 import { UserMenu } from "../UserMenu"
 
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import { StyledButton, StyledLink } from "./Menu.styled"
+
 export const BasicMenu = () =>{
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const isLoggedIn = useSelector(selectIsLoggedIn)
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -24,7 +24,7 @@ export const BasicMenu = () =>{
       {isLoggedIn ? 
       <UserMenu/> : 
       <>
-        <Button
+        <StyledButton
           id="basic-button"
           aria-controls={open ? 'basic-menu' : undefined}
           aria-haspopup="true"
@@ -33,7 +33,7 @@ export const BasicMenu = () =>{
           color="inherit"
         >
           <MenuIcon />
-        </Button>
+        </StyledButton>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
@@ -44,14 +44,14 @@ export const BasicMenu = () =>{
           }}
         >
           <MenuItem onClick={handleClose}>
-            <Link to="registration">
+            <StyledLink to="registration">
                 Registration
-            </Link>
+            </StyledLink>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-                <Link to="login">
+                <StyledLink to="login">
                     Login
-                </Link>            
+                </StyledLink>            
             </MenuItem>            
         </Menu>
       </>

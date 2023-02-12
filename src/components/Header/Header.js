@@ -1,16 +1,13 @@
-// import * as React from 'react';
 import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from '../../redux/selectors'; 
-import { NavLink, Link } from "react-router-dom"
 import { Outlet } from "react-router-dom"
 import { BasicMenu } from "../Menu"
 
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import { StyledAppBar, StyledToolbar, StyledLink, StyledAppShortcutIcon, StyledNavLink } from "./Header.styled"
 
 const navItems = [
   {
@@ -22,36 +19,40 @@ const navItems = [
 export const Header = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn)
   return (<>     
-        <AppBar position="fixed">
-          <Box sx={{ flexGrow: 1 }}>
-            <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                <Link to="/">
+        <StyledAppBar>
+          <StyledToolbar>             
+              <StyledLink to="/">
+                <StyledAppShortcutIcon/>
+                <Typography variant="h6">
                   Phonebook
-                </Link> 
-              </Typography>
+                </Typography>                
+              </StyledLink> 
             
               {isLoggedIn && <Box >
                 {navItems.map(({page, link}) => (
-                  <Button key={page} sx={{ color: '#fff' }}>
-                    <NavLink to={link}>
-                      {page}
-                    </NavLink>   
-                  </Button>
+                    <StyledNavLink key={page} to={link}>
+                        {page}
+                    </StyledNavLink>   
                 ))}
               </Box>}          
 
               <BasicMenu/>
-            </Toolbar>
-          </Box>
-        </AppBar>
-      
+            </StyledToolbar>
+        </StyledAppBar>      
 
-      <Suspense fallback={<div>Loading page...</div>}>
-        <main>
-            <Outlet />
-        </main>
-      </Suspense>
+        <Suspense fallback={<div>Loading page...</div>}>
+          <main>   
+            <Container maxWidth="lg">
+                <Outlet />
+            </Container>            
+          </main>
+        </Suspense>
+
+        {/* <footer>
+          <Container maxWidth="lg">
+            <p>footer</p>
+          </Container>           
+        </footer> */}
     </>
   );
 }
