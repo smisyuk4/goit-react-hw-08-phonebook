@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { setFilter } from "../../redux/contacts/contactsSlice"
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
+import { StyledWrap } from "./Filter.styled"
 
 export const Filter = () => {
     const dispatch = useDispatch()
@@ -11,15 +11,14 @@ export const Filter = () => {
     }
 
     return (       
-        <Box component="div" sx={{ position: "sticky", top: "70px"}}>
+        <StyledWrap>
             <TextField                                        
                     name="find"
                     type="text"
                     label="Find contacts by name"
                     autoComplete="off"
                     onChange={handleSetFilter}
-                    />
-            </Box>
-            
+            />
+        </StyledWrap>            
     );
 };

@@ -2,17 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearChange } from 'redux/contacts/contactsSlice';
 import { useChangeMutation } from 'redux/auth/apiSlice';
 import { selectItemChange } from 'redux/selectors';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
-const theme = createTheme();
+import { StyledButton } from "./FormChangeContact.styled"
 
 export const FormChangeContact = () => {
     const [ change ] = useChangeMutation()
@@ -45,17 +41,7 @@ export const FormChangeContact = () => {
     }
 
     return (
-    <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-        sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-        }}
-        >
+    <Container component="main" maxWidth="xs">     
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -81,20 +67,15 @@ export const FormChangeContact = () => {
                     />
                 </Grid>                
                 </Grid>
-                <Button
+                <StyledButton
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                     >
                     Change
-                </Button>
-            </Box>
-        </Box>       
+                </StyledButton>
+            </Box>    
     </Container>
-    </ThemeProvider>
-
     )
 };
-
-// defaultValue
