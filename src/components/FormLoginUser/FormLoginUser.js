@@ -3,10 +3,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from 'redux/auth/authSlice';
 import { useLoginMutation } from 'redux/auth/apiSlice';
 
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
@@ -14,7 +11,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { StyledButton, StyledLink } from "./FormLoginUser.styled"
+import { StyledTextField, StyledInputLabel, StyledOutlinedInput, StyledButton, StyledLink } from "./FormLoginUser.styled"
 
 export const FormLoginUser = () => {
     const [ login ] = useLoginMutation()
@@ -47,7 +44,7 @@ export const FormLoginUser = () => {
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                     <Grid item xs={12}>
-                        <TextField
+                        <StyledTextField
                         required
                         fullWidth
                         label="Email"
@@ -58,8 +55,8 @@ export const FormLoginUser = () => {
                     </Grid>
                     <Grid item xs={12}>
                     <FormControl fullWidth variant="outlined">
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <OutlinedInput
+                        <StyledInputLabel htmlFor="password">Password</StyledInputLabel>
+                        <StyledOutlinedInput
                             label="Password"
                             name="password"     
                             required                                                   

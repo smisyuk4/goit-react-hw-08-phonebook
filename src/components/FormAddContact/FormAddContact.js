@@ -35,11 +35,10 @@ import { useCreateMutation, useGetContactsQuery } from 'redux/auth/apiSlice';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { StyledButton } from "./FormAddContact.styled"
+import { StyledTextField, StyledButton } from "./FormAddContact.styled"
 
 export const FormAddContact = () => {
     const [ create ] = useCreateMutation()
@@ -79,7 +78,7 @@ export const FormAddContact = () => {
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
             <Grid item xs={12}>
-                <TextField                    
+                <StyledTextField                    
                 name="name"
                 type="text"
                 required
@@ -89,7 +88,7 @@ export const FormAddContact = () => {
                 />
             </Grid>
             <Grid item xs={12}>
-                <TextField
+                <StyledTextField
                 required
                 fullWidth
                 label="Phone number"

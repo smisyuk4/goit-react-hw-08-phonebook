@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setFilter } from "../../redux/contacts/contactsSlice"
-import TextField from '@mui/material/TextField';
-import { StyledWrap } from "./Filter.styled"
+import { StyledWrap, StyledTextField } from "./Filter.styled"
 
 export const Filter = () => {
     const dispatch = useDispatch()
@@ -12,7 +11,7 @@ export const Filter = () => {
 
     return (       
         <StyledWrap>
-            <TextField                                        
+            <StyledTextField                                        
                     name="find"
                     type="text"
                     label="Find contacts by name"

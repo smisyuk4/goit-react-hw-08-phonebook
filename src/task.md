@@ -42,6 +42,7 @@ npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/material @mui/styled-engine-sc styled-components
 npm install @mui/icons-material
 
+https://stackoverflow.com/questions/52911169/how-to-change-the-border-color-of-mui-textfield
 
 ## Повідомлення та лоадер
 https://notiflix.github.io/documentation
