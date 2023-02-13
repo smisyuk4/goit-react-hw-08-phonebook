@@ -2,13 +2,10 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setCredentials } from 'redux/auth/authSlice';
 import { useLoginMutation } from 'redux/auth/apiSlice';
-import { Link } from "react-router-dom"
 
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
@@ -17,9 +14,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme();
+import { StyledButton, StyledLink } from "./FormLoginUser.styled"
 
 export const FormLoginUser = () => {
     const [ login ] = useLoginMutation()
@@ -48,17 +43,7 @@ export const FormLoginUser = () => {
     };
 
     return (
-        <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-            sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-            >
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -94,24 +79,22 @@ export const FormLoginUser = () => {
                         </FormControl>
                     </Grid>
                     </Grid>
-                    <Button
+                    <StyledButton
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         >
                         Login
-                    </Button>
+                    </StyledButton>
                     <Grid container justifyContent="center">
                     <Grid item>
-                        <Link to="/registration">
+                        <StyledLink to="/registration">
                             Don't have account? Registration
-                        </Link>
+                        </StyledLink>
                     </Grid>
                     </Grid>
-                </Box>
-            </Box>       
+                </Box>      
         </Container>
-        </ThemeProvider>
     );
 }
