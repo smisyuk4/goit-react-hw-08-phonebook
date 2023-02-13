@@ -35,7 +35,7 @@ export const UserMenu = () =>{
 
     return (<>
        <Box sx={{ flexGrow: 0 }}>
-            <StyledTooltip title="Open settings">
+            <StyledTooltip title="My menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="avatar" src={avatar} />
               </IconButton>
