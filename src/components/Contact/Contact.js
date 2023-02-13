@@ -4,6 +4,11 @@ import { changeContact } from "../../redux/contacts/contactsSlice" // deleteCont
 import { useRemoveMutation } from "../../redux/auth/apiSlice" //useChangeMutation
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+import ButtonGroup from '@mui/material/ButtonGroup';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { StyledItem, StyledContact, StyledControlCameraIcon, StyledButton} from "./Contact.styled"
+
 export const Contact = ({ contact }) => {
     const { id, name, number } = contact;
     const [ remove ] = useRemoveMutation()
@@ -25,21 +30,24 @@ export const Contact = ({ contact }) => {
     }
 
     return (
-        <li>
-            {name}: {number}
-            <button
-                type="button"
+        <StyledItem>
+            <StyledContact>
+                <StyledControlCameraIcon/>
+                {name}: {number}
+            </StyledContact>
+            <ButtonGroup variant="contained" aria-label="outlined primary button group">
+            <StyledButton 
                 onClick={handleDeleteContact}
-            >
-                Remove
-            </button>
-            <button
-                type="button"
+                >
+                    <DeleteIcon/>
+            </StyledButton>
+            <StyledButton 
                 onClick={handleChangeContact}
-            >
-                Change
-            </button>
-        </li>
+                >
+                    <EditIcon/>
+                </StyledButton>
+            </ButtonGroup>           
+        </StyledItem>
     );
 };
 

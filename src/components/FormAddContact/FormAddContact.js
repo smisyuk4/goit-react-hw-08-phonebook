@@ -3,9 +3,6 @@
 // import { selectContacts } from 'redux/selectors';
 // import {Form, Field, Formik, ErrorMessage } from 'formik';
 // import * as Yup from 'yup';
-
-import { Report } from 'notiflix/build/notiflix-report-aio';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // import { IconContext } from 'react-icons';
 // import {
 //     RiContactsFill,
@@ -35,16 +32,14 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // });
 
 import { useCreateMutation, useGetContactsQuery } from 'redux/auth/apiSlice';
+import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme();
+import { StyledButton } from "./FormAddContact.styled"
 
 export const FormAddContact = () => {
     const [ create ] = useCreateMutation()
@@ -79,54 +74,41 @@ export const FormAddContact = () => {
         }
     };
 
-    return (
-    <ThemeProvider theme={theme}>
+    return (     
     <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-        sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-        }}
-        >
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TextField                    
-                    name="name"
-                    type="text"
-                    required
-                    fullWidth 
-                    label="User Name"
-                    autoComplete="off"    
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                    required
-                    fullWidth
-                    label="Phone number"
-                    name="number"
-                    type="text"
-                    autoComplete="off"
-                    />
-                </Grid>                
-                </Grid>
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    >
-                    Create
-                </Button>
-            </Box>
-        </Box>       
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <TextField                    
+                name="name"
+                type="text"
+                required
+                fullWidth 
+                label="User Name"
+                autoComplete="off"    
+                />
+            </Grid>
+            <Grid item xs={12}>
+                <TextField
+                required
+                fullWidth
+                label="Phone number"
+                name="number"
+                type="text"
+                autoComplete="off"
+                />
+            </Grid>                
+            </Grid>
+            <StyledButton
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                >
+                Create
+            </StyledButton>
+        </Box>
     </Container>
-    </ThemeProvider>
-
     )
 };
 

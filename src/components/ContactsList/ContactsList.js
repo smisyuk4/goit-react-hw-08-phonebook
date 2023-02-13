@@ -7,6 +7,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Filter } from 'components/Filter';
 import { Contact } from 'components/Contact';
 
+import { StyledList } from "./ContactList.styled"
+
 export const ContactsList = () => {
     const {data, isLoading, error, isSuccess} = useGetContactsQuery()
     const filter = useSelector(selectFilter)
@@ -32,9 +34,9 @@ export const ContactsList = () => {
         return (
             <div>
                 <Filter/>
-                <ul>
+                <StyledList>
                     {visibleContacts.length !== 0 && visibleContacts.map(item => <Contact key={item.id} contact={item}/>)}                        
-                </ul>
+                </StyledList>
             </div>
         )   
     } 
