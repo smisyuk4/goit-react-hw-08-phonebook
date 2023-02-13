@@ -1,12 +1,19 @@
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from '../redux/selectors'; 
+import { useGetContactsQuery } from "redux/auth/apiSlice";
 
 const Profile = () => {
     const user = useSelector(selectCurrentUser)
-    return (<>
-        <p>user name: <b>{user.name}</b></p>
-        <p>total contacts: <b>{100500}</b></p>
-    </>)
+    const {data, isSuccess} = useGetContactsQuery()
+    
+    if (isSuccess) {
+        console.log(data.length)
+        return (<>        
+            <p>User name: <b>{user.name}</b></p>
+            <p>User email: <b>{user.email}</b></p>
+            <p>Total contacts: <b>{data.length}</b></p>
+        </>)
+    }   
 }
 
 export default Profile

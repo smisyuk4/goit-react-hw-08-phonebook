@@ -83,7 +83,7 @@ export const FormAddContact = () => {
                 type="text"
                 required
                 fullWidth 
-                label="User Name"
+                label="Name"
                 autoComplete="off"    
                 />
             </Grid>

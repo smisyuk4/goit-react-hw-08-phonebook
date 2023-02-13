@@ -27,10 +27,14 @@ export const ContactsList = () => {
     }      
 
     if (isSuccess) {
-        const findName = filter.toLowerCase();
-        const visibleContacts = data.filter(({ name }) =>
-            name.toLowerCase().includes(findName));
- 
+        const findName = filter.toLowerCase();        
+
+        const visibleContacts = data
+            .filter(({ name }) => name.toLowerCase().includes(findName))
+            .sort((firstContact, secondContact) => {
+                return firstContact.name.localeCompare(secondContact.name)
+            })
+  
         return (
             <div>
                 <Filter/>

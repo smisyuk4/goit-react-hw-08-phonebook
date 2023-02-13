@@ -50,7 +50,7 @@ export const FormChangeContact = () => {
                     defaultValue={name}
                     required
                     fullWidth 
-                    label="User Name"
+                    label="Name"
                     autoComplete="off"             
                     />
                 </Grid>
