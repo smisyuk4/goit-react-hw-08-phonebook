@@ -54,3 +54,12 @@ npm i notiflix
 https://github.com/facebook/prop-types
 
 npm i prop-types
+
+## Форма
+https://stackworx.github.io/formik-mui/docs/guide/getting-started#configuring-components
+npm install formik formik-mui
+
+## Валідація форми
+https://codesandbox.io/s/github/formik/formik/tree/master/examples/with-material-ui?from-embed
+https://formik.org/docs/guides/validation
+npm install yup --save
