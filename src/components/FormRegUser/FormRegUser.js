@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setCredentials } from 'redux/auth/authSlice';
 import { useSignupMutation } from 'redux/auth/apiSlice';
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
@@ -10,24 +10,25 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+
 import { StyledTextField, StyledGrid, StyledIconButton, StyledButton, StyledLink } from "./FormRegUser.styled"
 
 const DEFAULT_VALUES = {
     name: '',
     email: '',
     password: '',
-  }
+}
 
 const VALIDATION_SCHEMA = Yup.object().shape({
     name: Yup.string()
-        .min(4, 'Too Short!')
-        .max(50, 'Too Long!')
+        .min(4, 'Too Short! Min 4 symbols')
+        .max(50, 'Too Long! Max 50 symbols')
         .required('Required'),    
     email: Yup.string().email('Invalid email').required('Required'),
     password: Yup.string()
         .min(8, 'Too Short! Min 8 symbols!')
         .required('Required'),
-  });
+});
 
 export const FormRegUser = () => {
     const [ signup ] = useSignupMutation()
@@ -41,14 +42,27 @@ export const FormRegUser = () => {
             name,
             email,
             password,
-        }
-        console.log(newUser)
-
-        resetForm()
+        }                
 
         try {
-            const userData = await signup(newUser)        
-            dispatch(setCredentials({...userData}))
+            const userData = await signup(newUser)  
+            if ( userData?.data ) {
+                dispatch(setCredentials({...userData}))
+                resetForm()
+                return
+            }
+  
+            if ( userData?.error?.status === 400 ) {
+                Notify.failure('User creation error', {
+                    position: 'center-top',
+                });
+            }
+
+            if ( userData?.error?.status === 500 ) {
+                Notify.failure('Server error', {
+                    position: 'center-top',
+                });
+            }            
         } catch (error){
             console.log(error)
         }

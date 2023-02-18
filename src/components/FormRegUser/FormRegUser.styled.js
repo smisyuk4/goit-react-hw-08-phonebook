@@ -3,21 +3,30 @@ import { TextField as TextFieldFormik } from 'formik-mui';
 
 import { Link } from "react-router-dom"
 
-// class="MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained MuiFormHelperText-filled css-1wc848c-MuiFormHelperText-root"
+// MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error MuiFormLabel-filled Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1sumxir-MuiFormLabel-root-MuiInputLabel-root
 
 export const StyledTextField = styled(TextFieldFormik)`
-// aria-hidden="true"
+/* MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-dbcl7b-MuiFormControl-root-MuiTextField-root */
 
-  & label.Mui-focused {
+
+/* MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-error Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root */
+  /* & label.Mui-focused {
     color: black;
-  } 
+  }  */
 
-  & .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: skyblue;
-    }
-  }
+  /* MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary Mui-error MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+    border-color: green;   
+  } */
+
+  /* &.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    border-color: skyblue;  
+  }    
+       */
+  /* &.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-error {      
+    border-color: green;        
+  } */
 `;
+
 
 export const StyledGrid = styled(Grid)`
   position: relative;

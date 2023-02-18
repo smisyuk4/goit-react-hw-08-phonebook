@@ -2,16 +2,28 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { setCredentials } from 'redux/auth/authSlice';
 import { useLoginMutation } from 'redux/auth/apiSlice';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
-import FormControl from '@mui/material/FormControl';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { StyledTextField, StyledInputLabel, StyledOutlinedInput, StyledButton, StyledLink } from "./FormLoginUser.styled"
+
+import { StyledTextField, StyledGrid, StyledIconButton, StyledButton, StyledLink } from "./FormLoginUser.styled"
+
+const DEFAULT_VALUES = {
+    email: '',
+    password: '',
+}
+
+const VALIDATION_SCHEMA = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Required'),
+    password: Yup.string()
+        .min(8, 'Too Short! Min 8 symbols!')
+        .required('Required'),
+});
 
 export const FormLoginUser = () => {
     const [ login ] = useLoginMutation()
@@ -20,20 +32,25 @@ export const FormLoginUser = () => {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const form = new FormData(event.currentTarget);
-
-        const valueForm = {           
-            email: form.get('email'),
-            password: form.get('password'),
+    const handleSubmit = async ({ name, email, password }, { resetForm }) => {
+        const user = {
+            email,
+            password,
         }
 
-        event.target.reset()
+        resetForm()
 
         try {
-            const userData = await login(valueForm)           
-            dispatch(setCredentials({...userData}))
+            const userData = await login(user)    
+            if ( userData?.data ) {
+                dispatch(setCredentials({...userData}))
+            }
+            
+            if ( userData?.error?.status === 400 ) {
+                Notify.failure('Login error', {
+                    position: 'center-top',
+                });
+            }          
         } catch (error){
             console.log(error)
         }
@@ -41,57 +58,65 @@ export const FormLoginUser = () => {
 
     return (
         <Container component="main" maxWidth="xs">
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                    <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <StyledTextField
-                        required
-                        fullWidth
-                        label="Email"
-                        name="email"
-                        type="email"
-                        autoComplete="off"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                    <FormControl fullWidth variant="outlined">
-                        <StyledInputLabel htmlFor="password">Password</StyledInputLabel>
-                        <StyledOutlinedInput
-                            label="Password"
-                            name="password"     
-                            required                                                   
-                            type={showPassword ? 'text' : 'password'}                            
-                            endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
+            <Formik
+                initialValues={ DEFAULT_VALUES }
+                validationSchema={ VALIDATION_SCHEMA }
+                onSubmit={handleSubmit}
+            >       
+            {({ isValid, dirty }) => (             
+                <Form autoComplete="off">
+                    <Grid container spacing={2} sx={{ mt: 3 }}>
+                        <Grid item xs={12}>
+                            <Field
+                                component={ StyledTextField }
+                                fullWidth
+                                label="Email"
+                                name="email"
+                                type="email"  
+                                required                
+                                />                            
+                        </Grid>
+
+                        <StyledGrid item xs={12}>
+                            <Field
+                                component={ StyledTextField }
+                                fullWidth
+                                label="Password"
+                                name="password"
+                                type={showPassword ? 'text' : 'password'} 
+                                title="min 8 symbols"       
+                                required                          
+                            />       
+
+                            <StyledIconButton
                                 aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}      
-                                edge="end"
-                                >
+                                onClick={handleClickShowPassword}                          
+                            >
                                 {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                            </InputAdornment>
-                            }                 
-                        />
-                        </FormControl>
+                            </StyledIconButton>                     
+                        </StyledGrid>
                     </Grid>
-                    </Grid>
+
                     <StyledButton
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        disabled={!(isValid && dirty)}
                         >
                         Login
                     </StyledButton>
+
                     <Grid container justifyContent="center">
-                    <Grid item>
-                        <StyledLink to="/registration">
-                            Don't have account? Registration
-                        </StyledLink>
+                        <Grid item>
+                            <StyledLink to="/registration">
+                                Don't have account? Registration
+                            </StyledLink>
+                        </Grid>
                     </Grid>
-                    </Grid>
-                </Box>      
+                </Form> 
+            )}  
+            </Formik>      
         </Container>
     );
 }

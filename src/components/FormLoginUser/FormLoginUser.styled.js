@@ -1,8 +1,9 @@
-import { TextField, InputLabel, OutlinedInput, Button, styled } from "@mui/material"
+import { Grid, IconButton, Button, styled } from "@mui/material"
+import { TextField as TextFieldFormik } from 'formik-mui';
 import { Link } from "react-router-dom"
 
-export const StyledTextField = styled(TextField)`
-  & label.Mui-focused {
+export const StyledTextField = styled(TextFieldFormik)`
+  /* & label.Mui-focused {
     color: black;
   } 
 
@@ -10,23 +11,17 @@ export const StyledTextField = styled(TextField)`
     &.Mui-focused fieldset {
       border-color: skyblue;
     }
-  }
+  } */
 `;
 
-export const StyledInputLabel = styled(InputLabel)`
-    &.Mui-focused {
-        color: black;
-    } 
+export const StyledGrid = styled(Grid)`
+  position: relative;
 `
 
-export const StyledOutlinedInput = styled(OutlinedInput)`
-    & .Mui-focused {
-        border-color: red;
-    } 
-
-    &.Mui-focused .MuiOutlinedInput-notchedOutline {
-        border-color: skyblue;
-    }
+export const StyledIconButton = styled(IconButton)`
+  position: absolute;
+  top: 23px;
+  right: 10px;
 `
 
 export const StyledButton = styled(Button)`

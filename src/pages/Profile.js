@@ -7,7 +7,6 @@ const Profile = () => {
     const {data, isSuccess} = useGetContactsQuery()
     
     if (isSuccess) {
-        console.log(data.length)
         return (<>        
             <p>User name: <b>{user.name}</b></p>
             <p>User email: <b>{user.email}</b></p>

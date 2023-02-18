@@ -57,6 +57,8 @@ npm i prop-types
 
 ## Форма
 https://stackworx.github.io/formik-mui/docs/guide/getting-started#configuring-components
+https://styled-components.com/docs/basics#attaching-additional-props
+https://mui.com/system/styled/
 npm install formik formik-mui
 
 ## Валідація форми

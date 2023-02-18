@@ -1,7 +1,8 @@
-import { TextField, Button, styled } from "@mui/material"
+import { Button, styled } from "@mui/material"
+import { TextField as TextFieldFormik } from 'formik-mui';
 
-export const StyledTextField = styled(TextField)`
-  & label.Mui-focused {
+export const StyledTextField = styled(TextFieldFormik)`
+  /* & label.Mui-focused {
     color: black;
   } 
 
@@ -9,7 +10,7 @@ export const StyledTextField = styled(TextField)`
     &.Mui-focused fieldset {
       border-color: skyblue;
     }
-  }
+  } */
 `;
 
 export const StyledButton = styled(Button)`
