@@ -36,12 +36,14 @@ export const Contact = ({ contact }) => {
                 {name}: {number}
             </StyledContact>
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <StyledButton 
+            <StyledButton
+                aria-label="delete" 
                 onClick={handleDeleteContact}
                 >
                     <DeleteIcon/>
             </StyledButton>
             <StyledButton 
+                aria-label="change"
                 onClick={handleChangeContact}
                 >
                     <EditIcon/>

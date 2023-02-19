@@ -20,6 +20,7 @@ export class Modal extends Component {
         >            
             <StyledBox>
                 <StyledButton 
+                    aria-label="close"
                     onClick={closeModel}
                     >
                         <CloseIcon/>
