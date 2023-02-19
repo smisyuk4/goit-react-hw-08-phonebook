@@ -10,8 +10,9 @@ const Home = () => {
                 <ul>         
                     <li>hooks</li>           
                     <li>react-redux</li>
-                    <li>reduxjs/toolkit</li>
+                    <li>rtk-query</li>
                     <li>react-router-dom</li>
+                    <li>portal</li>
                     <li>lazy</li>
                     <li>redux-persist</li>
                     <li>formik</li>
