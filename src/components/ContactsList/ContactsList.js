@@ -36,12 +36,12 @@ export const ContactsList = () => {
             })
   
         return (
-            <div>
+            <>
                 <Filter/>
                 <StyledList>
                     {visibleContacts.length !== 0 && visibleContacts.map(item => <Contact key={item.id} contact={item}/>)}                        
                 </StyledList>
-            </div>
+            </>
         )   
     } 
 }

@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import { useCreateMutation, useGetContactsQuery } from 'redux/auth/apiSlice';
+import { showFormAddContact } from 'redux/contacts/contactsSlice';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Formik, Form, Field } from 'formik';
@@ -38,6 +40,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
 export const FormAddContact = () => {
     const [ create ] = useCreateMutation()
     const { data } = useGetContactsQuery()
+    const dispatch = useDispatch()
 
     const handleSubmit = async ({ name, number }, { resetForm }) => {
         const newContact = {
@@ -61,6 +64,7 @@ export const FormAddContact = () => {
                 Notify.success('The contact has been sent to storage', {
                     position: 'center-top',
                 });
+                dispatch(showFormAddContact(false))
                 resetForm()   
                 return
             }

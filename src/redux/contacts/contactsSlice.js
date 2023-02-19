@@ -4,6 +4,7 @@ const initialState = {
     filter: '',
     itemChange: {},
     isChange: false,
+    isAdd: false,
 }
 
 const contactsSlice = createSlice({
@@ -20,9 +21,12 @@ const contactsSlice = createSlice({
         },
         setFilter: (state, action) => {
             state.filter = action.payload
+        },
+        showFormAddContact: (state, action) => {
+            state.isAdd = action.payload
         }
     },
 });
 
-export const { changeContact, clearChange, setFilter } = contactsSlice.actions;
+export const { changeContact, clearChange, setFilter, showFormAddContact } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;

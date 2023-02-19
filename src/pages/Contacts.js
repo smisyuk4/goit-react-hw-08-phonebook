@@ -1,37 +1,40 @@
-import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsChange } from 'redux/selectors';
-import { clearChange } from 'redux/contacts/contactsSlice';
+import { selectIsChange, selectIsAdd } from 'redux/selectors';
+import { clearChange, showFormAddContact } from 'redux/contacts/contactsSlice';
 
 import { FormAddContact } from 'components/FormAddContact';
 import { FormChangeContact } from 'components/FormChangeContact';
 import { ContactsList } from 'components/ContactsList';
 import { Modal } from "components/Modal";
 
-import IconButton from '@mui/material/IconButton';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { StyledIconButton } from "./Contacts.styled";
 
 const Contacts = () => {
-  const [ isAddContact, setIsAddContact ] = useState(false)
   const isChange = useSelector(selectIsChange)
+  const isAdd = useSelector(selectIsAdd)
   const dispatch = useDispatch()
 
   const closeModel = () => {
     dispatch(clearChange())
-    setIsAddContact(false)
+    dispatch(showFormAddContact(false))
   }
+
+  const handleAddContact = ()=>{
+    dispatch(showFormAddContact(true))
+}
 
   return (
       <div>       
-          <IconButton 
+          <StyledIconButton 
             aria-label="add" 
             size="large"
-            onClick={()=> setIsAddContact(prev => !prev)}
+            onClick={handleAddContact}
           >
             <PersonAddIcon/>
-          </IconButton>
+          </StyledIconButton>
           
-          {isAddContact && <Modal title='Add contact' children={<FormAddContact/>} closeModel={closeModel}/>}
+          {isAdd && <Modal title='Add contact' children={<FormAddContact/>} closeModel={closeModel}/>}
 
           {isChange &&  <Modal title='Change contact' children={<FormChangeContact/>} closeModel={closeModel}/>}
 
