@@ -5,7 +5,7 @@ export const StyledWrap = styled.div`
     position: sticky;
     display: inline-block;
     top: 70px;
-    z-index: 2000;
+    z-index: 1000;
     margin-bottom: 10px;
     border-radius: 5px;
     background-color: white;
