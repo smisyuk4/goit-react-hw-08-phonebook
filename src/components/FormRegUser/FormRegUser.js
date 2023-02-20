@@ -19,14 +19,33 @@ const DEFAULT_VALUES = {
     password: '',
 }
 
+const REGEX_NAME = /^([a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+['`’ʼ -])*((['`’ʼ -][a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії])?[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]*)*$/;
+const REGEX_EMAIL = /^[^\s,\\\/\|@][a-zA-Z\d\-]+@[^\s,\\\/\|\.@][a-zA-Z\d\-]+\.[a-zA-Z]{2,}$/;
+
+
 const VALIDATION_SCHEMA = Yup.object().shape({
     name: Yup.string()
+        .trim()
         .min(4, 'Too Short! Min 4 symbols')
         .max(50, 'Too Long! Max 50 symbols')
+        .matches(
+            REGEX_NAME,
+            'Name may contain only Eng or Ua letters, apostrophe, spaces and dash'
+        )
         .required('Required'),    
-    email: Yup.string().email('Invalid email').required('Required'),
+    email: Yup.string()
+        .trim()
+        .min(6, 'Too Short! Min 6 symbols')
+        .max(50, 'Too Long! Max 50 symbols')
+        .matches(
+            REGEX_EMAIL,
+            'Email may contain only Eng letters. Not use spaces and some symbols / | \\ ,'
+        )
+        .required('Required'),
     password: Yup.string()
+        .trim()
         .min(8, 'Too Short! Min 8 symbols!')
+        .max(50, 'Too Long! Max 50 symbols')
         .required('Required'),
 });
 
@@ -94,6 +113,7 @@ export const FormRegUser = () => {
                                 <Field
                                     component={ StyledTextField }
                                     fullWidth
+                                    title="Example: segio2023@g7-top.com"  
                                     label="Email"
                                     name="email"
                                     type="email"  

@@ -16,20 +16,22 @@ const DEFAULT_VALUES = {
     number: '',
 }
 
-const REGEX_NAME = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
+const REGEX_NAME = /^([a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+['`’ʼ -])*((['`’ʼ -][a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії])?[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]*)*$/;
 const REGEX_NUMBER =
     /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
 
 const VALIDATION_SCHEMA = Yup.object().shape({
     name: Yup.string()
-        .min(2, 'Too Short! Min 2 symbols')
-        .max(20, 'Too Long! Max 20 symbols')
+        .trim()
+        .min(4, 'Too Short! Min 4 symbols')
+        .max(50, 'Too Long! Max 50 symbols')
         .matches(
             REGEX_NAME,
-            'Name may contain only letters, apostrophe, dash and spaces'
+            'Name may contain only Eng or Ua letters, apostrophe, spaces and dash'
         )
         .required(),
     number: Yup.string()
+        .trim()
         .matches(
             REGEX_NUMBER,
             'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'

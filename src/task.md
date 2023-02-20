@@ -65,3 +65,7 @@ npm install formik formik-mui
 https://codesandbox.io/s/github/formik/formik/tree/master/examples/with-material-ui?from-embed
 https://formik.org/docs/guides/validation
 npm install yup --save
+
+# Регулярні вирази
+https://regex101.com/
+https://stackoverflow.com/questions/20224936/regex-for-ukrainian-letters-how-to-separate-cyrillic-words-by-capital-letter
