@@ -20,7 +20,7 @@ const DEFAULT_VALUES = {
 }
 
 const REGEX_NAME = /^([a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+['`’ʼ -])*((['`’ʼ -][a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії])?[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]*)*$/;
-const REGEX_EMAIL = /^[^\s,\\\\/\\|@][a-zA-Z\d\\-]+@[^\s,\\\\/\\|\\.@][a-zA-Z\d\\-]+\.[a-zA-Z]{2,}$/;
+const REGEX_EMAIL = /^[^\s,\\\\/\\|@][a-zA-Z\d\\-]*@[^\s,\\\\/\\|\\.@][a-zA-Z\d\\-]*\.[a-zA-Z]{2,}$/;
 
 
 const VALIDATION_SCHEMA = Yup.object().shape({
