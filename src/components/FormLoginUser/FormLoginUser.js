@@ -18,10 +18,27 @@ const DEFAULT_VALUES = {
     password: '',
 }
 
+const REGEX_EMAIL = /^[^\s,\\\\/\\|@][a-zA-Z\d\\-]*@[^\s,\\\\/\\|\\.@][a-zA-Z\d\\-]*\.[a-zA-Z]{2,}$/;
+const REGEX_PASSWORD = /^[^\s.][a-zA-Z\d-]{7,}$/
+
 const VALIDATION_SCHEMA = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Required'),
+    email: Yup.string()
+        .trim()
+        .min(6, 'Too Short! Min 6 symbols')
+        .max(50, 'Too Long! Max 50 symbols')
+        .matches(
+            REGEX_EMAIL,
+            'Email may contain only Eng letters. Not use spaces and some symbols / | \\ ,'
+        )
+        .required('Required'),
     password: Yup.string()
+        .trim()
         .min(8, 'Too Short! Min 8 symbols!')
+        .max(50, 'Too Long! Max 50 symbols')
+        .matches(
+            REGEX_PASSWORD,
+            'Password may contain only Eng letters and digits, dash. Not use spaces and other symbols.'
+        )
         .required('Required'),
 });
 
@@ -70,6 +87,7 @@ export const FormLoginUser = () => {
                             <Field
                                 component={ StyledTextField }
                                 fullWidth
+                                title="Example: segio2023@g7-top.com"
                                 label="Email"
                                 name="email"
                                 type="email"  
