@@ -5,6 +5,7 @@ import { useSignupMutation } from 'redux/auth/apiSlice';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { customRegex } from "components/regex";
 
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -19,17 +20,13 @@ const DEFAULT_VALUES = {
     password: '',
 }
 
-const REGEX_NAME = /^([a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+['`’ʼ -])*((['`’ʼ -][a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії])?[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]*)*$/;
-const REGEX_EMAIL = /^[^\s,\\\\/\\|@][a-zA-Z\d\\-]*@[^\s,\\\\/\\|\\.@][a-zA-Z\d\\-]*\.[a-zA-Z]{2,}$/;
-const REGEX_PASSWORD = /^[^\s.][a-zA-Z\d-]{7,}$/
-
 const VALIDATION_SCHEMA = Yup.object().shape({
     name: Yup.string()
         .trim()
         .min(4, 'Too Short! Min 4 symbols')
         .max(50, 'Too Long! Max 50 symbols')
         .matches(
-            REGEX_NAME,
+            customRegex.name,
             'Name may contain only Eng or Ua letters, apostrophe, spaces and dash'
         )
         .required('Required'),    
@@ -38,7 +35,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
         .min(6, 'Too Short! Min 6 symbols')
         .max(50, 'Too Long! Max 50 symbols')
         .matches(
-            REGEX_EMAIL,
+            customRegex.email,
             'Email may contain only Eng letters. Not use spaces and some symbols / | \\ ,'
         )
         .required('Required'),
@@ -47,7 +44,7 @@ const VALIDATION_SCHEMA = Yup.object().shape({
         .min(8, 'Too Short! Min 8 symbols!')
         .max(50, 'Too Long! Max 50 symbols')
         .matches(
-            REGEX_PASSWORD,
+            customRegex.password,
             'Password may contain only Eng letters and digits, dash. Not use spaces and other symbols.'
         )
         .required('Required'),

@@ -5,6 +5,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { customRegex } from "components/regex";
 
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -16,24 +17,20 @@ const DEFAULT_VALUES = {
     number: '',
 }
 
-const REGEX_NAME = /^([a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]+['`’ʼ -])*((['`’ʼ -][a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії])?[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії]*)*$/;
-const REGEX_NUMBER =
-    /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/;
-
 const VALIDATION_SCHEMA = Yup.object().shape({
     name: Yup.string()
         .trim()
         .min(4, 'Too Short! Min 4 symbols')
         .max(50, 'Too Long! Max 50 symbols')
         .matches(
-            REGEX_NAME,
+            customRegex.name,
             'Name may contain only Eng or Ua letters, apostrophe, spaces and dash'
         )
         .required(),
     number: Yup.string()
         .trim()
         .matches(
-            REGEX_NUMBER,
+            customRegex.number,
             'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
         )
         .required(),
@@ -115,7 +112,7 @@ export const FormAddContact = () => {
                                 name="number"
                                 type="text"                                
                                 fullWidth 
-                                title="must be digits and can contain spaces..."  
+                                title="Example: 050-4838779; +972-50-4838779; +38(050)4838779"  
                                 label="Phone number"      
                                 required          
                             />                     
