@@ -7,7 +7,11 @@ import { BasicMenu } from "../Menu"
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { StyledAppBar, StyledToolbar, StyledLink, StyledAppShortcutIcon, StyledNavLink } from "./Header.styled"
+
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
+import { StyledAppBar, StyledToolbar, StyledLink, StyledAppShortcutIcon, StyledNavLink, StyledBottomNavigation } from "./Header.styled"
 
 const navItems = [
   {
@@ -48,15 +52,25 @@ export const Header = () => {
           </main>
         </Suspense>
 
-        {/* <footer>
-          <Container maxWidth="lg">
-            <p>footer</p>
-          </Container>           
-        </footer> */}
+        <footer>  
+          <StyledBottomNavigation>
+            <BottomNavigationAction
+              href='https://www.linkedin.com/in/%D1%81%D0%B5%D1%80%D0%B3%D0%B5%D0%B9-%D0%BC%D0%B8%D1%81%D1%8E%D0%BA'
+              target="_blank" 
+              rel="noopener noreferer"
+              area-label="linkedin dev"   
+              icon={<LinkedInIcon />} 
+            />     
+
+            <BottomNavigationAction
+              href='https://www.linkedin.com/in/olena-boiko/'
+              target="_blank" 
+              rel="noopener noreferer"
+              area-label="linkedin qa" 
+              icon={<LinkedInIcon />} 
+            />
+          </StyledBottomNavigation>   
+        </footer>
     </>
   );
 }
-
-
-
-

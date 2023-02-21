@@ -2,8 +2,7 @@ const Home = () => {
     return (
         <>
             <h1>React app</h1>            
-            <ul>
-                <li><a href='https://www.linkedin.com/in/%D1%81%D0%B5%D1%80%D0%B3%D0%B5%D0%B9-%D0%BC%D0%B8%D1%81%D1%8E%D0%BA'>linkedin</a></li>
+            <ul>        
                 <li><a href='https://github.com/smisyuk4/goit-react-hw-08-phonebook'>github</a></li>
                 <li><a href='https://connections-api.herokuapp.com/docs/#/User/post_users_signup'>connections-api</a></li>
                 <li><b>Usage:</b></li>
