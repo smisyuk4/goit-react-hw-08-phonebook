@@ -17,10 +17,12 @@ export const StyledIconButton = styledMui(IconButton)`
     z-index: 1000;
 
     color: white;
+    border: 2px solid white;
     background-color: skyblue;
 
     &:hover, &:focus{
         color: green;
+        border-color: black;
         background-color: black;
     }
 

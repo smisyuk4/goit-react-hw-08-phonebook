@@ -14,8 +14,7 @@ code {
     monospace;
 }
 
-a {
-  /* width: 100%; */
-  /* text-decoration: none; */
-  /* color: inherit; */
+/* styled Remove confirm window */
+.notiflix-confirm-content{
+  border: 2px solid;
 }

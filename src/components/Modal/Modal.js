@@ -26,7 +26,7 @@ export class Modal extends Component {
                         <CloseIcon/>
                 </StyledButton>
 
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id="modal-modal-title" variant="h6" component="h2" align="center">
                 { title }
                 </Typography>
 

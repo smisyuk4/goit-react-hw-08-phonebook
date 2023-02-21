@@ -100,7 +100,7 @@ export const FormChangeContact = () => {
                                     name="name"
                                     type="text"                                
                                     fullWidth 
-                                    title="min 2 symbols"  
+                                    title="min 4 symbols"  
                                     label="Name"      
                                     required                                                                           
                                 />            
