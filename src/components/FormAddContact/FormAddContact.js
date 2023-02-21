@@ -112,7 +112,7 @@ export const FormAddContact = () => {
                                 name="number"
                                 type="text"                                
                                 fullWidth 
-                                title="Example: 050-4838779; +972-50-4838779; +38(050)4838779"  
+                                title="Example: 050-4838779; +972-50-4838779; +38(050)48 38 779"  
                                 label="Phone number"      
                                 required          
                             />                     
