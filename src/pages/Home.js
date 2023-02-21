@@ -28,7 +28,8 @@ const Home = () => {
                 <ul>
                     <li>official docs</li>
                     <li>developer.mozilla.org</li>
-                    <li>stackoverflow.com</li>                
+                    <li>stackoverflow.com</li>     
+                    <li>regex101.com</li>           
                 </ul>
             </ul>
         </>

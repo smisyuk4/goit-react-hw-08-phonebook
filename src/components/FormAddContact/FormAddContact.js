@@ -17,7 +17,7 @@ const DEFAULT_VALUES = {
     number: '',
 }
 
-const VALIDATION_SCHEMA = Yup.object().shape({
+export const VALIDATION_SCHEMA = Yup.object().shape({
     name: Yup.string()
         .trim()
         .min(4, 'Too Short! Min 4 symbols')
@@ -29,6 +29,8 @@ const VALIDATION_SCHEMA = Yup.object().shape({
         .required(),
     number: Yup.string()
         .trim()
+        .min(6, 'Too Short! Min 6 symbols')
+        .max(18, 'Too Long! Max 18 symbols')
         .matches(
             customRegex.number,
             'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
