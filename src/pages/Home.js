@@ -3,8 +3,8 @@ const Home = () => {
         <>
             <h1>React app</h1>            
             <ul>        
-                <li><a href='https://github.com/smisyuk4/goit-react-hw-08-phonebook'>github</a></li>
-                <li><a href='https://connections-api.herokuapp.com/docs/#/User/post_users_signup'>connections-api</a></li>
+                <li><a href='https://github.com/smisyuk4/goit-react-hw-08-phonebook'>Github</a></li>
+                <li><a href='https://connections-api.herokuapp.com/docs/#/User/post_users_signup'>Connections-api</a></li>
                 <li><b>Usage:</b></li>
                 <ul>         
                     <li>hooks</li>           
